@@ -5,8 +5,6 @@
 ![dependencies](https://img.shields.io/david/mliszcz/tangojs.svg)
 ![dev dependencies](https://img.shields.io/david/dev/mliszcz/tangojs.svg)
 ![npm version](https://img.shields.io/npm/v/tangojs.svg)
-![Downloads](https://img.shields.io/npm/dm/tangojs.svg)
-![License](https://img.shields.io/npm/l/tangojs.svg)
 
 TANGO Control System client library.
 

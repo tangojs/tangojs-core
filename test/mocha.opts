@@ -1,5 +1,4 @@
-./test/bootstrap.test.es6
-./test/unit/**/*.test.es6
---require babelhook
+./test/bootstrap.test.js
+./test/unit/**/*.test.js
 --recursive
 --reporter spec

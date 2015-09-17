@@ -1,0 +1,28 @@
+{
+  "name": "tangojs",
+  "version": "0.1.0",
+  "authors": [
+    "mliszcz <liszcz.michal@gmail.com>"
+  ],
+  "description": "TANGO Control System client library.",
+  "main": "lib/tangojs.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "tango"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "coverage",
+    "examples",
+    "src",
+    "gulpfile.js"
+  ]
+}

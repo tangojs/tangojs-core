@@ -52,3 +52,11 @@ Thumbs.db
 test/
 src/
 babelhook.js
+
+coverage/
+examples/
+.editorconfig
+.eslintrc
+.gitignore
+.travis.yml
+gulpfile.js

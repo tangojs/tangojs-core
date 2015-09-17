@@ -1,7 +1,14 @@
+---
+
 language: node_js
+
 node_js:
-  - '0.10'
-  - '0.12'
-  - 'iojs'
+  - '4'
+
+before_install:
+  - npm install coveralls
+  - npm install codecov.io
+
 after_script:
-  - npm install coveralls && cat ./coverage/lcov.info | coveralls
+  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+  - cat ./coverage/coverage.json | ./node_modules/codecov.io/bin/codecov.io.js
