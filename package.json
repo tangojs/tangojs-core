@@ -9,6 +9,7 @@
   "scripts": {
     "clean": "gulp clean",
     "compile": "gulp compile",
+    "docs": "esdoc -c ./esdoc.json",
     "lint": "eslint src",
     "prepublish": "npm run lint && npm run compile",
     "test": "babel-node ./node_modules/.bin/isparta cover _mocha"
@@ -19,12 +20,15 @@
     "babel-eslint": "*",
     "bower": "*",
     "chai": "*",
+    "chai-as-promised": "*",
     "del": "*",
+    "esdoc": "*",
     "eslint": "*",
     "gulp": "*",
     "gulp-babel": "*",
     "gulp-concat": "*",
     "gulp-filter": "*",
+    "gulp-gh-pages": "*",
     "gulp-plumber": "*",
     "gulp-rename": "*",
     "gulp-rollup": "*",
@@ -36,6 +40,7 @@
     "istanbul": "*",
     "mocha": "*",
     "rollup": "*",
-    "sinon": "*"
+    "sinon": "*",
+    "sinon-chai": "*"
   }
 }

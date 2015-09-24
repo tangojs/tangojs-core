@@ -36,3 +36,6 @@ node_modules
 nbproject
 .idea
 .node_history
+
+# Documentation
+/docs

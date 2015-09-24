@@ -54,6 +54,7 @@ src/
 babelhook.js
 
 coverage/
+docs/
 examples/
 .editorconfig
 .eslintrc

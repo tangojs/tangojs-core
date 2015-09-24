@@ -1,16 +1,165 @@
+import { connector } from '../tangojs'
 import { DeviceAttribute } from './DeviceAttribute'
+import { DeviceCommand } from './DeviceCommand'
+import { InvalidDeviceNameException } from './exceptions'
 
+const deviceNamePattern = /^\w+\/\w+\/\w+$/
+
+/**
+ * Device proxy that allows one to access attributes and properties of
+ * the remote device.
+ */
 export class DeviceProxy {
 
-  constructor(address) {
-    this.address = address
+  /**
+   * Creates new DeviceProxy.
+   * Takes 1 or 3 arguments.
+   * @param {...string} args device name
+   * @throws {InvalidDeviceNameException} thrown when device name is invalid
+   * @example
+   * let p1 = new tangojs.DeviceProxy('my/dev/1')
+   * let p2 = new tangojs.DeviceProxy('my', 'dev', '1')
+   */
+  constructor(...args) {
+
+    let [domain, family, member] = args
+
+    /** @private */
+    this.deviceName = (domain && family && member)
+      ? `${domain}/${family}/${member}` : domain
+
+    if (! this.deviceName || this.deviceName.search(deviceNamePattern) < 0)
+      throw new InvalidDeviceNameException(this.deviceName)
   }
 
-  getAddress() {
-    return this.address
+  /**
+   * Returns device name.
+   * @return {string} device name
+   */
+  getName() {
+    return this.deviceName
   }
 
-  getAttribute(name) {
-    return new DeviceAttribute(`${this.address}/${name}`)
+  /**
+   * Reads device status.
+   * @return {Promise<DeviceStatus,Error>} device status
+   */
+  readStatus() {
+    return connector.readDeviceStatus(this.deviceName)
   }
+
+  /**
+   * Reads device info.
+   * @return {Promise<DeviceInfo,Error>} device info
+   */
+  readInfo() {
+    return connector.readDeviceInfo(this.deviceName)
+  }
+
+  /**
+   * Reads list of attribute names.
+   * @return {Promise<string[],Error>} attribute names
+   */
+  readAttributesList() {
+    return connector.readAttributesList(this.deviceName)
+  }
+
+  /**
+   * Factory method for {@link DeviceAttribute} instances.
+   * @param {string} attributeName attribute name
+   * @return {DeviceAttribute} attribute proxy
+   */
+  createDeviceAttribute(attributeName) {
+    return new DeviceAttribute(this, attributeName)
+  }
+
+  /**
+   * Reads attribute value.
+   * @param {string} attributeName attribute name
+   * @return {Promise<AttributeValue,Error>} result
+   */
+  readAttributeValue(attributeName) {
+    return connector.readAttributeValue(this.deviceName, attributeName)
+  }
+
+  /**
+   * Writes attribute value.
+   * Returns promise of stored value (if sync is true)
+   * or undefined (if sync is false).
+   * @param {string}   attributeName  attribute name
+   * @param {Object}   value          value to write
+   * @param {boolean}  [sync=false]   synchronous / asynchronous call
+   * @return {Promise<AttributeValue,Error>|undefined} stored value or undefined
+   */
+  writeAttributeValue(attributeName, value, sync = false) {
+    let nv = [[attributeName, value]]
+    let bulk = this.writeAttributeValuesBulk(nv, sync, false)
+    return sync ? bulk.then( ([r]) => r ) : undefined
+  }
+
+  /**
+   * Writes values into multiple attributes.
+   * Returns promise of stored values (if sync is true)
+   * or undefined (if sync is false).
+   * @param {Object[][]}  nameValueTuples  list of 2-element lists [name, value]
+   * @param {boolean}     [sync=false]     synchronous / asynchronous call
+   * @param {boolean}     [reset=false]    reset not specified attributes
+   * @return {Promise<AttributeValue[],Error>|undefined} stored value or
+   * undefined
+   */
+  writeAttributeValuesBulk(nameValueTuples, sync = false, reset = false) {
+    return connector.writeAttributeValuesBulk(nameValueTuples, sync, reset)
+  }
+
+  /**
+   * Reads attribute info.
+   * @param {string} attributeName attribute name
+   * @return {Promise<AttributeInfo,Error>} result
+   */
+  readAttributeInfo(attributeName) {
+    return connector.readAttributeInfo(this.deviceName, attributeName)
+  }
+
+  /**
+   * Factory method for {@link DeviceCommand} instances.
+   * @param {string} commandName command name
+   * @return {DeviceCommand} command proxy
+   */
+  createDeviceCommand(commandName) {
+    return new DeviceCommand(this.deviceName, commandName)
+  }
+
+  /**
+   * Reads list of command names.
+   * @return {Promise<string[],Error>} command names
+   */
+  readCommandsList() {
+    return connector.readCommandsList(this.deviceName)
+  }
+
+  /**
+   * Reads command info.
+   * @param {string} commandName command name
+   * @return {Promise<CommandInfo,Error>} result
+   */
+  readCommandInfo(commandName) {
+    return connector.readCommandInfo(this.deviceName, commandName)
+  }
+
+  /**
+   * Executes command. Pass undefined as argument for 0-arity commands.
+   * Returns execution result (if sync is true) or undefined (if sync is false).
+   * @param {string}   commandName  command name
+   * @param {Object}   arg          input argument
+   * @param {boolean}  sync         synchronous / asynchronous call
+   * @return {Promise<CommandResult[],Error>|undefined} result of execution or
+   * undefined null
+   */
+  executeCommand(commandName, arg = undefined, sync = false) {
+    return connector.executeCommand(this.deviceName, commandName, arg, sync)
+  }
+
+  // TODO add support for events
+
+  // TODO add support for properties
 }
