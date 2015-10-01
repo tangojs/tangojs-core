@@ -22,7 +22,6 @@
     "test",
     "coverage",
     "docs"
-    "examples",
     "src",
     "gulpfile.js"
   ]

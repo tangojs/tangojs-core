@@ -35,12 +35,15 @@ describe('DeviceCommand', () => {
 
   describe('execute', () => {
 
-    it('Should execute command asynchronously', () => {
+    it('Should execute command (async))', () => {
       let argin = {}
-      deviceProxy.executeCommand = sinon.stub().returns(undefined)
-      chai.expect(deviceCommand.execute(argin)).to.be.undefined
-      deviceProxy.executeCommand
-        .should.have.been.calledWith(commandName, argin, false)
+      deviceProxy.executeCommand =
+        sinon.stub().returns(Promise.resolve(undefined))
+      return Promise.all([
+        deviceCommand.execute(argin).should.eventually.be.undefined,
+        deviceProxy.executeCommand
+          .should.have.been.calledWith(commandName, argin, false)
+      ])
     })
 
     it('Should execute command', () => {

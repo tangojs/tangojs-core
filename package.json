@@ -1,11 +1,21 @@
 {
   "name": "tangojs",
-  "description": "TANGO Control System client library.",
   "version": "0.1.0",
+  "description": "TANGO Control System client library.",
   "main": "lib/tangojs.js",
   "author": "mliszcz",
-  "repository": "mliszcz/tangojs",
   "license": "MIT",
+  "keywords": [
+    "tango"
+  ],
+  "homepage": "https://github.com/mliszcz/tangojs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mliszcz/tangojs-connector-local.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mliszcz/tangojs/issues"
+  },
   "scripts": {
     "clean": "gulp clean",
     "compile": "gulp compile",

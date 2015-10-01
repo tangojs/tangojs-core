@@ -29,8 +29,7 @@ export class DeviceCommand {
    * Returns execution result (if sync is true) or undefined (if sync is false).
    * @param {Object}   arg   input argument
    * @param {boolean}  sync  synchronous / asynchronous call
-   * @return {Promise<CommandResult[],Error>|undefined} result of execution or
-   * undefined
+   * @return {Promise<CommandOutputResponse,Error>|Promise<undefined,Error>}
    */
   execute(arg = undefined, sync = false) {
     return this.deviceProxy.executeCommand(this.commandName, arg, sync)

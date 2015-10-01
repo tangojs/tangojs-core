@@ -1,38 +1,58 @@
 # tangojs
 
-![Build Status](https://img.shields.io/travis/mliszcz/tangojs.svg)
-![Coverage](https://img.shields.io/codecov/c/github/mliszcz/tangojs.svg)
+[ ![Build Status](https://img.shields.io/travis/mliszcz/tangojs.svg)
+](https://travis-ci.org/mliszcz/tangojs)
+[ ![Coverage](https://img.shields.io/codecov/c/github/mliszcz/tangojs.svg)
+](https://codecov.io/github/mliszcz/tangojs)
 ![dependencies](https://img.shields.io/david/mliszcz/tangojs.svg)
 ![dev dependencies](https://img.shields.io/david/dev/mliszcz/tangojs.svg)
-![npm version](https://img.shields.io/npm/v/tangojs.svg)
+[ ![npm version](https://img.shields.io/npm/v/tangojs.svg)
+](https://www.npmjs.com/package/tangojs)
 
 TANGO Control System client library for web browsers.
 
-## Demo
+## Examples
 ```javascript
 import tangojs from 'tangojs'
-import myTangojsConnector from 'my-tangojs-connector'
+import { MyConnectorImpl } from 'my-tangojs-connector'
 
-let connector = myTangojsConnector.create(...)
+let conn = new MyConnectorImpl(...)
+tangojs.setConnector(conn)
 
-tangojs.setConnector(my)
+let devProxy  = new tangojs.DeviceProxy('tangojs/test/1')
+let attrProxy = devProxy.createDeviceAttribute('number_scalar')
+let cmdProxy  = devProxy.createDeviceCommand('double')
 
-let proxy = new tangojs.DeviceProxy('my/dev/01')
-
-proxy.getStatus().then(status => {
-  console.log(status)
-})
-
-let attribute = proxy.createDeviceAttribute('scalar1')
 let sync = true
+let value = 32
 
-attribute.writeValue(10, sync).then((result) =>
-  assert(result.value == 10)
-})
+devProxy.readAttributesList()
+
+  .then(attributes =>
+    console.log('Attributes:', attributes)
+  )
+
+  .then(() => attrProxy.readValue())
+  .then(response => {
+    console.log(`Reading value: ${response.argout}`)
+    console.log(`Writing value: ${value} (sync)`)
+  })
+
+  .then(() => attrProxy.writeValue(value, sync))
+  .then(response =>
+    console.log(`Stored value: ${response.argout}`)
+  )
+
+  .then(() => cmdProxy.execute(value, sync))
+  .then(response =>
+    console.log(`Command 'double': 2*${value} is ${response.argout}`)
+  )
+
+  .catch(console.log)
 
 ```
 
-## Getting Started
+## Installation
 
 Install it via npm:
 ```shell
@@ -55,21 +75,23 @@ And load it directly in the browser (this attaches `tangojs` object to the `wind
 ```
 
 ## Connectors
-Tangojs is designed to support multiple *connectors* (backends).
-A connector is basically a low-level proxy between Tangojs
+TangoJS is designed to support multiple *connectors* (backends).
+A connector is basically a low-level proxy between TangoJS
 and server-side implementation. You can use one of existing
-connectors or implement your own (refer to the `Connector` interface in the docs).
+connectors or implement your own (refer to the
+[`Connector`](https://mliszcz.github.io/tangojs/class/src/tangojs/Connector.js~Connector.html)
+interface in the docs).
 
 Available connectors:
 
-* `tangojs-connector-local` *TODO*
+* [`tangojs-connector-local`](https://github.com/mliszcz/tangojs-connector-local)
 * `tangojs-connector-mtango` *TODO*
 * `tangojs-connector-websocket` *TODO*
 
 ## Documentation
 API docs are available [here](http://mliszcz.github.io/tangojs).
-## License
 
+## License
 MIT
 
 ## References

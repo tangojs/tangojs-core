@@ -1,9 +1,6 @@
 
 /* eslint-disable no-unused-vars */
 
-// FIXME isparta does not support istanbul comments
-/* isparta ignore next */
-
 /**
  * Tangojs connector interface. This class contains backend-specific
  * logic. Each connector plugin have to provide implementation
@@ -36,7 +33,7 @@ export class Connector {
   /**
    * Reads device status.
    * @param {string} deviceName device name
-   * @return {Promise<DeviceStatus,Error>} device status
+   * @return {Promise<DeviceStatusResponse,Error>} device status
    */
   readDeviceStatus(deviceName) {}
 
@@ -58,7 +55,7 @@ export class Connector {
    * Reads attribute value.
    * @param {string}  deviceName     device name
    * @param {string}  attributeName  attribute name
-   * @return {Promise<AttributeValue,Error>} result
+   * @return {Promise<AttributeReadResponse,Error>} result
    */
   readAttributeValue(deviceName, attributeName) {}
 
@@ -70,9 +67,9 @@ export class Connector {
    * @param {Object[][]}  nameValueTuples  list of 2-element lists [name, value]
    * @param {boolean}     [sync=false]     synchronous / asynchronous call
    * @param {boolean}     [reset=false]    reset not specified attributes
-   * @return {Promise<AttributeValue[],Error>|null} stored value or null
+   * @return {Promise<AttributeReadResponse[],Error>|Promise<undefined,Error>}
    */
-  writeAttributeValuesBulk(deviceName, nameValueTuples, sync, reset) {}
+  writeAttributeValuesBulk(deviceName, nameValueTuples, sync = false, reset = false) {}
 
   /**
    * Reads attribute info.
@@ -103,8 +100,8 @@ export class Connector {
    * @param {string}   deviceName   device name
    * @param {string}   commandName  command name
    * @param {Object}   arg          input argument
-   * @param {boolean}  sync         synchronous / asynchronous call
-   * @return {Promise<CommandResult[],Error>|null} result of execution or null
+   * @param {boolean}  [sync=false] synchronous / asynchronous call
+   * @return {Promise<CommandOutputResponse,Error>|Promise<undefined,Error>}
    */
   executeCommand(deviceName, commandName, arg, sync) {}
 }

@@ -18,7 +18,7 @@ export class DeviceAttribute {
 
   /**
    * Reads attribute value.
-   * @return {Promise<AttributeValue,Error>} result
+   * @return {Promise<AttributeReadResponse,Error>} result
    */
   readValue() {
     return this.deviceProxy.readAttributeValue(this.attributeName)
@@ -28,9 +28,9 @@ export class DeviceAttribute {
    * Writes attribute value.
    * Returns promise of stored value (if sync is true)
    * or undefined (if sync is false).
-   * @param {any}      value         value to write
+   * @param {Object}   value         value to write
    * @param {boolean}  [sync=false]  synchronous / asynchronous call
-   * @return {Promise<AttributeValue,Error>|undefined} stored value or undefined
+   * @return {Promise<AttributeReadResponse,Error>|Promise<undefined,Error>}
    */
   writeValue(value, sync = false) {
     return this.deviceProxy

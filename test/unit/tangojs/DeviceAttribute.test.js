@@ -50,12 +50,15 @@ describe('DeviceAttribute', () => {
 
   describe('writeValue', () => {
 
-    it('Should write value to the device asynchronously', () => {
+    it('Should write value to the device (async)', () => {
       let value = {}
-      deviceProxy.writeAttributeValue = sinon.stub().returns(undefined)
-      chai.expect(deviceAttribute.writeValue(value)).to.be.undefined
-      deviceProxy.writeAttributeValue
-        .should.have.been.calledWith(attributeName, value, false)
+      deviceProxy.writeAttributeValue =
+        sinon.stub().returns(Promise.resolve(undefined))
+      return Promise.all([
+        deviceAttribute.writeValue(value).should.eventually.be.undefined,
+        deviceProxy.writeAttributeValue
+          .should.have.been.calledWith(attributeName, value, false)
+      ])
     })
 
     it('Should write value to the device', () => {

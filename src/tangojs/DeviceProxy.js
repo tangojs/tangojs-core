@@ -6,8 +6,7 @@ import { InvalidDeviceNameException } from './exceptions'
 const deviceNamePattern = /^\w+\/\w+\/\w+$/
 
 /**
- * Device proxy that allows one to access attributes and properties of
- * the remote device.
+ * Device proxy that allows one to access attributes and properties of a device.
  */
 export class DeviceProxy {
 
@@ -42,7 +41,7 @@ export class DeviceProxy {
 
   /**
    * Reads device status.
-   * @return {Promise<DeviceStatus,Error>} device status
+   * @return {Promise<DeviceStatusResponse,Error>} device status
    */
   readStatus() {
     return connector.readDeviceStatus(this.deviceName)
@@ -76,7 +75,7 @@ export class DeviceProxy {
   /**
    * Reads attribute value.
    * @param {string} attributeName attribute name
-   * @return {Promise<AttributeValue,Error>} result
+   * @return {Promise<AttributeReadResponse,Error>} result
    */
   readAttributeValue(attributeName) {
     return connector.readAttributeValue(this.deviceName, attributeName)
@@ -89,12 +88,12 @@ export class DeviceProxy {
    * @param {string}   attributeName  attribute name
    * @param {Object}   value          value to write
    * @param {boolean}  [sync=false]   synchronous / asynchronous call
-   * @return {Promise<AttributeValue,Error>|undefined} stored value or undefined
+   * return {Promise<AttributeReadResponse,Error>|Promise<undefined|Error}
    */
   writeAttributeValue(attributeName, value, sync = false) {
     let nv = [[attributeName, value]]
     let bulk = this.writeAttributeValuesBulk(nv, sync, false)
-    return sync ? bulk.then( ([r]) => r ) : undefined
+    return bulk.then( r => (r || [undefined])[0] )
   }
 
   /**
@@ -104,11 +103,11 @@ export class DeviceProxy {
    * @param {Object[][]}  nameValueTuples  list of 2-element lists [name, value]
    * @param {boolean}     [sync=false]     synchronous / asynchronous call
    * @param {boolean}     [reset=false]    reset not specified attributes
-   * @return {Promise<AttributeValue[],Error>|undefined} stored value or
-   * undefined
+   * @return {Promise<AttributeReadResponse[],Error>|Promise<undefined|Error>}
    */
   writeAttributeValuesBulk(nameValueTuples, sync = false, reset = false) {
-    return connector.writeAttributeValuesBulk(nameValueTuples, sync, reset)
+    return connector.writeAttributeValuesBulk(this.deviceName,
+      nameValueTuples, sync, reset)
   }
 
   /**
@@ -126,7 +125,7 @@ export class DeviceProxy {
    * @return {DeviceCommand} command proxy
    */
   createDeviceCommand(commandName) {
-    return new DeviceCommand(this.deviceName, commandName)
+    return new DeviceCommand(this, commandName)
   }
 
   /**
@@ -149,11 +148,10 @@ export class DeviceProxy {
   /**
    * Executes command. Pass undefined as argument for 0-arity commands.
    * Returns execution result (if sync is true) or undefined (if sync is false).
-   * @param {string}   commandName  command name
-   * @param {Object}   arg          input argument
-   * @param {boolean}  sync         synchronous / asynchronous call
-   * @return {Promise<CommandResult[],Error>|undefined} result of execution or
-   * undefined null
+   * @param {string}   commandName      command name
+   * @param {Object}   [arg=undefined]  input argument
+   * @param {boolean}  [sync=false]     synchronous / asynchronous call
+   * @return {Promise<CommandOutputResponse,Error>|Promise<undefined|Error>
    */
   executeCommand(commandName, arg = undefined, sync = false) {
     return connector.executeCommand(this.deviceName, commandName, arg, sync)
