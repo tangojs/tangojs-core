@@ -38,4 +38,5 @@ nbproject
 .node_history
 
 # Documentation
-/docs
+docs/
+.publish/

@@ -93,19 +93,3 @@ API docs are available [here](http://mliszcz.github.io/tangojs).
 
 ## License
 MIT
-
-## References
-
-* https://bitbucket.org/hzgwpn/mtango/wiki/Tango%20REST%20API%20Proposal.%20Ver.%200.1
-
-* https://bitbucket.org/hzgwpn/mtango/wiki/mTango%20REST%20API
-
-* http://www.esrf.eu/computing/cs/tango/tango_doc/kernel_doc/ds_prog/node13.html
-
-* http://www.esrf.eu/computing/cs/tango/tango_doc/kernel_doc/ds_prog/node4.html
-
-* http://www.esrf.eu/computing/cs/tango/tango_doc/kernel_doc/ds_prog/node3.html
-
-* http://www.esrf.eu/computing/cs/tango/tango_doc/kernel_doc/ds_prog/node6.html
-
-* http://www.esrf.eu/computing/cs/tango/tango_doc/kernel_doc/tango_java_api/

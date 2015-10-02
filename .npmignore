@@ -55,6 +55,7 @@ babelhook.js
 
 coverage/
 docs/
+.publish/
 .editorconfig
 .eslintrc
 .gitignore
