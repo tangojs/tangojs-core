@@ -21,7 +21,9 @@
     "compile": "gulp compile",
     "docs": "gulp docs",
     "lint": "eslint src",
-    "prepublish": "npm run lint && npm run compile",
+    "prepublish": "npm run lint && npm run test && npm run compile",
+    "preversion": "npm run lint && npm run test",
+    "postversion": "git push && git push --tags",
     "site": "gulp site",
     "test": "babel-node ./node_modules/.bin/isparta cover _mocha"
   },
