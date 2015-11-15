@@ -3,7 +3,7 @@ var babel       = require('gulp-babel')
 var concat      = require('gulp-concat')
 var esdoc       = require('gulp-esdoc')
 var filter      = require('gulp-filter')
-var ghPages     = require('gulp-gh-pages');
+var ghPages     = require('gulp-gh-pages')
 var plumber     = require('gulp-plumber')
 var rename      = require('gulp-rename')
 var rollup      = require('gulp-rollup')
@@ -39,6 +39,14 @@ gulp.task('clean', () =>
  * Rollup concatenates ES6 modules properly.
  * Sourcemap generated with first sourcemaps.write() call needs to be dropped
  * in the next step. Otherwise uglifier will try parsing that as a .js file.
+ *
+ * Rollup-0.20.x: variable exports are corrupted (?), let/var is missing.
+ * Have to stick to the gulp-rollup-1.0.0, which comes with rollup-0.8.x.
+ * Example:
+ *   export var x = null
+ * becomes:
+ *   x = null // note missing var
+ *   export { x }
  */
 gulp.task('compile', () =>
   gulp.src(CONFIG.entryFile, {read: false})
@@ -48,7 +56,10 @@ gulp.task('compile', () =>
     }))
     .pipe(rollup())
     .pipe(sourcemaps.init())
-    .pipe(babel({modules: 'umd'}))
+    .pipe(babel({
+      presets: ['es2015'],
+      plugins: ['transform-es2015-modules-umd']
+    }))
     .pipe(concat(CONFIG.packageName))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(CONFIG.targetDir))

@@ -2,8 +2,6 @@
 
 [ ![Build Status](https://img.shields.io/travis/mliszcz/tangojs.svg)
 ](https://travis-ci.org/mliszcz/tangojs)
-[ ![Coverage](https://img.shields.io/codecov/c/github/mliszcz/tangojs.svg)
-](https://codecov.io/github/mliszcz/tangojs)
 ![dependencies](https://img.shields.io/david/mliszcz/tangojs.svg)
 ![dev dependencies](https://img.shields.io/david/dev/mliszcz/tangojs.svg)
 [ ![npm version](https://img.shields.io/npm/v/tangojs.svg)
@@ -19,36 +17,33 @@ import { MyConnectorImpl } from 'my-tangojs-connector'
 let conn = new MyConnectorImpl(...)
 tangojs.setConnector(conn)
 
-let devProxy  = new tangojs.DeviceProxy('tangojs/test/1')
-let attrProxy = devProxy.createDeviceAttribute('number_scalar')
-let cmdProxy  = devProxy.createDeviceCommand('double')
+let devProxy = new tangojs.proxy.DeviceProxy('tangojs/test/1')
 
-let sync = true
-let value = 32
+devProxy.get_attribute_list().then(attributes =>
+  console.log(`Attributes: ${attributes}`)
+)
 
-devProxy.readAttributesList()
+let attProxy = new tangojs.proxy.AttributeProxy(
+  'tangojs/test/1/number_scalar')
 
-  .then(attributes =>
-    console.log('Attributes:', attributes)
-  )
+let in = new tangojs.struct.AttributeValue({
+  value: 32
+})
 
-  .then(() => attrProxy.readValue())
-  .then(response => {
-    console.log(`Reading value: ${response.argout}`)
-    console.log(`Writing value: ${value} (sync)`)
-  })
+attProxy.write(in)
 
-  .then(() => attrProxy.writeValue(value, sync))
-  .then(response =>
-    console.log(`Stored value: ${response.argout}`)
-  )
+attProxt.read().then(outVal =>
+  console.log(`Value: ${outVal.value}`)
+)
 
-  .then(() => cmdProxy.execute(value, sync))
-  .then(response =>
-    console.log(`Command 'double': 2*${value} is ${response.argout}`)
-  )
+let cmdProxy = new tangojs.proxy.CommandProxy('tangojs/test/1/double')
 
-  .catch(console.log)
+let argin = new tangojs.struct.DeviceData(10)
+
+cmdProxy.inout(argin).then(result =>
+  console.log(`Command: 2*10 = ${result.value}`)
+)
+
 
 ```
 

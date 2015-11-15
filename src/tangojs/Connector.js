@@ -2,6 +2,20 @@
 /* eslint-disable no-unused-vars */
 
 /**
+ * Backend-specific connector implementation.
+ * @private
+ */
+export let connector = null
+
+/**
+ * Sets connector interface implementation.
+ * @param {Connector} conn connector implementation
+ */
+export function setConnector(conn) {
+  connector = conn
+}
+
+/**
  * Tangojs connector interface. This class contains backend-specific
  * logic. Each connector plugin have to provide implementation
  * of this interface.
@@ -10,98 +24,119 @@
 export class Connector {
 
   /**
-   * Reads list of all domains.
-   * @return {Promise<string[],Error>} result
+   * @return {Promise<string>}
+   * @param {string} devname
    */
-  dbReadDomains() {}
+  get_device_status(devname) { }
 
   /**
-   * Reads list of all families in given domain.
-   * @param {string} domain domain name
-   * @return {Promise<string[],Error>} result
+   * @return {Promise<DevState>}
+   * @param {string} devname
    */
-  dbReadFamilies(domain) {}
+  get_device_state(devname) { }
 
   /**
-   * Reads list of all members in given domain and family.
-   * @param {string} domain domain name
-   * @param {string} family family name
-   * @return {Promise<string[],Error>} result
+   * @return {Promise<DeviceInfo>}
+   * @param {string} devname
    */
-  dbReadMembers(domain, family) {}
+  get_device_info(devname) { }
 
   /**
-   * Reads device status.
-   * @param {string} deviceName device name
-   * @return {Promise<DeviceStatusResponse,Error>} device status
+   * @return {Promise<string[]>}
+   * @param {string} pattern
    */
-  readDeviceStatus(deviceName) {}
+  get_device_list(pattern) { }
 
   /**
-   * Reads device info.
-   * @param {string} deviceName device name
-   * @return {Promise<DeviceInfo,Error>} device info
+   * @return {Promise<string[]>}
+   * @param {string} pattern
    */
-  readDeviceInfo(deviceName) {}
+  get_device_domain(pattern) { }
 
   /**
-   * Reads list of attribute names.
-   * @param {string} deviceName device name
-   * @return {Promise<string[],Error>} attribute names
+   * @return {Promise<string[]>}
+   * @param {string} pattern
    */
-  readAttributesList(deviceName) {}
+  get_device_family(pattern) { }
 
   /**
-   * Reads attribute value.
-   * @param {string}  deviceName     device name
-   * @param {string}  attributeName  attribute name
-   * @return {Promise<AttributeReadResponse,Error>} result
+   * @return {Promise<string[]>}
+   * @param {string} pattern
    */
-  readAttributeValue(deviceName, attributeName) {}
+  get_device_member(pattern) { }
 
   /**
-   * Writes values into multiple attributes.
-   * Returns promise of stored values (if sync is true)
-   * or null (if sync is false).
-   * @param {string}      deviceName       device name
-   * @param {Object[][]}  nameValueTuples  list of 2-element lists [name, value]
-   * @param {boolean}     [sync=false]     synchronous / asynchronous call
-   * @param {boolean}     [reset=false]    reset not specified attributes
-   * @return {Promise<AttributeReadResponse[],Error>|Promise<undefined,Error>}
+   * @return {Promise<string[]>}
+   * @param {string} devname
+   * @param {string} pattern
    */
-  writeAttributeValuesBulk(deviceName, nameValueTuples, sync = false, reset = false) {}
+  get_device_property_list(devname, pattern) { }
 
   /**
-   * Reads attribute info.
-   * @param {string}  deviceName     device name
-   * @param {string}  attributeName  attribute name
-   * @return {Promise<AttributeInfo,Error>} result
+   * @return {Promise<DbDatum>|Promise<DbDatum[]>}
+   * @param {string} devname
+   * @param {string|string[]|DbDatum[]} propnames
    */
-  readAttributeInfo(deviceName, attributeName) {}
+  get_device_property(devname, propnames) { }
 
   /**
-   * Reads list of command names.
-   * @param {string} deviceName device name
-   * @return {Promise<string[],Error>} command names
+   * @param {string} devname
+   * @param {DbDatum[]} properties
    */
-  readCommandsList(deviceName) {}
+  put_device_property(devname, properties) { }
 
   /**
-   * Reads command info.
-   * @param {string}  deviceName   device name
-   * @param {string}  commandName  command name
-   * @return {Promise<CommandInfo,Error>} result
+   * @param {string} devname
+   * @param {string|string[]|DbDatum[]} propnames property names
    */
-  readCommandInfo(deviceName, commandName) {}
+  delete_device_property(devname, propnames) { }
 
   /**
-   * Executes command. Pass undefined as argument for 0-arity commands.
-   * Returns execution result (if sync is true) or null (if sync is false).
-   * @param {string}   deviceName   device name
-   * @param {string}   commandName  command name
-   * @param {Object}   arg          input argument
-   * @param {boolean}  [sync=false] synchronous / asynchronous call
-   * @return {Promise<CommandOutputResponse,Error>|Promise<undefined,Error>}
+   * @return {Promise<string[]>}
+   * @param {string} devname
    */
-  executeCommand(deviceName, commandName, arg, sync) {}
+  get_device_attribute_list(devname) { }
+
+  /**
+   * @return {Promise<AttributeInfo>|Promise<AttributeInfo[]>}
+   * @param {string} devname
+   * @param {undefined|string|string[]} attnames
+   */
+  get_device_attribute_info(devname, attnames) { }
+
+  /**
+   * @return {Promise<DeviceAttribute>|Promise<DeviceAttribute[]>}
+   * @param {string} devname
+   * @param {string|string[]} attname
+   */
+  read_device_attribute(devname, attname) { }
+
+  /**
+   * @param {string} devname
+   * @param {DeviceAttribute|DeviceAttribute[]} attrs
+   */
+  write_device_attribute(devname, attrs) { }
+
+  /**
+   * Write and then read the attribute values, for the specified device.
+   * @return {Promise<DeviceAttribute>|Promise<DeviceAttribute[]>}
+   * @param {string} devname
+   * @param {DeviceAttribute|DeviceAttribute[]} attrs
+   */
+  write_read_device_attribute(devname, attrs) { }
+
+  /**
+   * @return {Promise<DeviceData>}
+   * @param {string} devname
+   * @param {string} cmdname
+   * @param {undefined|DeviceData} argin
+   */
+  device_command_inout(devname, cmdname, argin) { }
+
+  /**
+   * @return {Promise<CommandInfo>}
+   * @param {string} devname
+   * @param {string} cmdname
+   */
+  device_command_query(devname, cmdname) { }
 }

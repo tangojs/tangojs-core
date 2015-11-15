@@ -3,12 +3,7 @@
 language: node_js
 
 node_js:
-  - '4'
+  - '4.1'
+  - '5'
 
-before_install:
-  - npm install coveralls
-  - npm install codecov.io
-
-after_script:
-  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
-  - cat ./coverage/coverage.json | ./node_modules/codecov.io/bin/codecov.io.js
+script: "npm run lint && npm run test && npm run compile"
