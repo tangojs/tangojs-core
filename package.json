@@ -11,7 +11,7 @@
   "homepage": "https://github.com/mliszcz/tangojs#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/mliszcz/tangojs-connector-local.git"
+    "url": "git+ssh://git@github.com/mliszcz/tangojs.git"
   },
   "bugs": {
     "url": "https://github.com/mliszcz/tangojs/issues"
