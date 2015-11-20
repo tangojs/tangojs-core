@@ -139,4 +139,10 @@ export class Connector {
    * @param {string} cmdname
    */
   device_command_query(devname, cmdname) { }
+
+  /**
+   * @return {Promise<CommandInfo[]>}
+   * @param {string} devname
+   */
+  device_command_list_query(devname) { }
 }

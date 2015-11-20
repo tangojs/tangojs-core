@@ -41,6 +41,13 @@ export class DeviceProxy {
   }
 
   /**
+  * @return {Promise<CommandInfo[]>}
+  */
+  command_list_query() {
+    return connector.device_command_list_query(this._devname)
+  }
+
+  /**
    * @return {Promise<DeviceInfo>}
    */
   get_info() {
