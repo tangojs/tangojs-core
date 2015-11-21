@@ -41,8 +41,8 @@ export class DeviceProxy {
   }
 
   /**
-  * @return {Promise<CommandInfo[]>}
-  */
+   * @return {Promise<CommandInfo[]>}
+   */
   command_list_query() {
     return connector.device_command_list_query(this._devname)
   }
@@ -71,6 +71,7 @@ export class DeviceProxy {
   }
 
   /**
+   * @return {Promise<undefined>}
    * @param {DbDatum[]} properties
    */
   put_property(properties) {
@@ -78,6 +79,7 @@ export class DeviceProxy {
   }
 
   /**
+   * @return {Promise<undefined>}
    * @param {string|string[]|DbDatum[]} propnames property names
    */
   delete_property(propnames) {
@@ -108,6 +110,7 @@ export class DeviceProxy {
   }
 
   /**
+   * @return {Promise<undefined>}
    * @param {DeviceAttribute|DeviceAttribute[]} attrs
    */
   write_attribute(attrs) {
@@ -115,7 +118,6 @@ export class DeviceProxy {
   }
 
   /**
-   * Write and then read the attribute values, for the specified device.
    * @return {Promise<DeviceAttribute>|Promise<DeviceAttribute[]>}
    * @param {DeviceAttribute|DeviceAttribute[]} attrs
    */

@@ -80,12 +80,14 @@ export class Connector {
   get_device_property(devname, propnames) { }
 
   /**
+   * @return {Promise<undefined>}
    * @param {string} devname
    * @param {DbDatum[]} properties
    */
   put_device_property(devname, properties) { }
 
   /**
+   * @return {Promise<undefined>}
    * @param {string} devname
    * @param {string|string[]|DbDatum[]} propnames property names
    */
@@ -112,13 +114,13 @@ export class Connector {
   read_device_attribute(devname, attname) { }
 
   /**
+   * @return {Promise<undefined>}
    * @param {string} devname
    * @param {DeviceAttribute|DeviceAttribute[]} attrs
    */
   write_device_attribute(devname, attrs) { }
 
   /**
-   * Write and then read the attribute values, for the specified device.
    * @return {Promise<DeviceAttribute>|Promise<DeviceAttribute[]>}
    * @param {string} devname
    * @param {DeviceAttribute|DeviceAttribute[]} attrs

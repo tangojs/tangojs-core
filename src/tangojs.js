@@ -19,11 +19,12 @@ import { AttributeInfo }   from './tangojs/struct/AttributeInfo'
 import { CommandInfo }     from './tangojs/struct/CommandInfo'
 import { DbDatum }         from './tangojs/struct/DbDatum'
 import { DeviceAttribute } from './tangojs/struct/DeviceAttribute'
+import { DeviceData }      from './tangojs/struct/DeviceData'
 import { DeviceInfo }      from './tangojs/struct/DeviceInfo'
 
 /** @private */
 export const struct = {
-  AttributeInfo, CommandInfo, DbDatum, DeviceAttribute, DeviceInfo
+  AttributeInfo, CommandInfo, DbDatum, DeviceAttribute, DeviceData, DeviceInfo
 }
 
 import * as generatedTango from './tangojs/tango/generated'
