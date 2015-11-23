@@ -34,8 +34,7 @@ export class AttributeProxy {
    * @param {DeviceAttribute} attr
    */
   write(attr) {
-    let a = Object.assign({}, attr)
-    a.name = this._attname
+    let a = Object.assign({}, attr._data, {name: this._attname})
     return this._proxy.write_attribute(a)
   }
 }
