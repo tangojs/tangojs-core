@@ -51,7 +51,7 @@ export class DeviceProxy {
    * @return {Promise<DeviceInfo>}
    */
   get_info() {
-    return connector.get_device_info()
+    return connector.get_device_info(this._devname)
   }
 
   /**
