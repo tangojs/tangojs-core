@@ -1,6 +1,6 @@
 {
   "name": "tangojs",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "TANGO Control System client library for web browsers.",
   "main": "lib/tangojs.js",
   "author": "mliszcz",
