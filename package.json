@@ -1,5 +1,5 @@
 {
-  "name": "tangojs",
+  "name": "tangojs-core",
   "version": "0.2.4",
   "description": "TANGO Control System client library for web browsers.",
   "main": "lib/tangojs.js",
@@ -8,13 +8,13 @@
   "keywords": [
     "tango"
   ],
-  "homepage": "https://github.com/mliszcz/tangojs#readme",
+  "homepage": "https://github.com/mliszcz/tangojs-core#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/mliszcz/tangojs.git"
+    "url": "git+ssh://git@github.com/mliszcz/tangojs-core.git"
   },
   "bugs": {
-    "url": "https://github.com/mliszcz/tangojs/issues"
+    "url": "https://github.com/mliszcz/tangojs-core/issues"
   },
   "scripts": {
     "clean": "gulp clean",
