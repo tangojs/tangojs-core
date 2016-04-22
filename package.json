@@ -3,18 +3,18 @@
   "version": "0.2.5",
   "description": "TANGO Control System client library for web browsers.",
   "main": "lib/tangojs.js",
-  "author": "mliszcz",
+  "author": "mliszcz <liszcz.michal@gmail.com>",
   "license": "MIT",
   "keywords": [
     "tango"
   ],
-  "homepage": "https://github.com/mliszcz/tangojs-core#readme",
+  "homepage": "https://github.com/tangojs/tangojs-core#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/mliszcz/tangojs-core.git"
+    "url": "git+ssh://git@github.com/tangojs/tangojs-core.git"
   },
   "bugs": {
-    "url": "https://github.com/mliszcz/tangojs-core/issues"
+    "url": "https://github.com/tangojs/tangojs-core/issues"
   },
   "scripts": {
     "clean": "gulp clean",
