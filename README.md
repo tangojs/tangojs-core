@@ -1,15 +1,14 @@
 # tangojs
 
-[ ![Build Status](https://img.shields.io/travis/mliszcz/tangojs.svg)
-](https://travis-ci.org/mliszcz/tangojs)
-![dependencies](https://img.shields.io/david/mliszcz/tangojs.svg)
-![dev dependencies](https://img.shields.io/david/dev/mliszcz/tangojs.svg)
-[ ![npm version](https://img.shields.io/npm/v/tangojs.svg)
-](https://www.npmjs.com/package/tangojs)
+![dependencies](https://img.shields.io/david/tangojs/tangojs-core.svg)
+![dev dependencies](https://img.shields.io/david/dev/tangojs/tangojs-core.svg)
+[ ![npm version](https://img.shields.io/npm/v/tangojs-core.svg)
+](https://www.npmjs.com/package/tangojs-core)
 
 TANGO Control System client library for web browsers.
 
 ## Examples
+
 ```javascript
 import tangojs from 'tangojs'
 import { MyConnectorImpl } from 'my-tangojs-connector'
@@ -43,15 +42,13 @@ let argin = new tangojs.struct.DeviceData(10)
 cmdProxy.inout(argin).then(result =>
   console.log(`Command: 2*10 = ${result.value}`)
 )
-
-
 ```
 
 ## Installation
 
 Install it via npm:
 ```shell
-npm install tangojs
+npm install --save tangojs-core
 ```
 
 And include in your project:
@@ -59,32 +56,28 @@ And include in your project:
 import tangojs from 'tangojs'
 ```
 
-Or use Bower:
-```shell
-bower install tangojs
-```
-
-And load it directly in the browser (this attaches `tangojs` object to the `window`):
+And load it directly in the browser (this attaches the `tangojs` object to
+the `window`):
 ```html
 <script type="text/javascript">tangojs/lib/tangojs.js</script>
 ```
 
 ## Connectors
+
 TangoJS is designed to support multiple *connectors* (backends).
-A connector is basically a low-level proxy between TangoJS
-and server-side implementation. You can use one of existing
-connectors or implement your own (refer to the
-[`Connector`](https://mliszcz.github.io/tangojs/class/src/tangojs/Connector.js~Connector.html)
-interface in the docs).
+A connector is basically a low-level proxy between the TangoJS frontend stack
+and the server-side implementation. You can use one of existing connectors or
+implement your own (refer to the [`Connector`](#) interface in the docs).
 
 Available connectors:
 
-* [`tangojs-connector-local`](https://github.com/mliszcz/tangojs-connector-local)
-* `tangojs-connector-mtango` *TODO*
-* `tangojs-connector-websocket` *TODO*
+* [`tangojs-connector-local`](https://github.com/tangojs/tangojs-connector-local)
+* [`tangojs-connector-mtango`](https://github.com/tangojs/tangojs-connector-mtango)
 
 ## Documentation
-API docs are available [here](http://mliszcz.github.io/tangojs).
+
+API docs are available [here](#).
 
 ## License
+
 MIT
