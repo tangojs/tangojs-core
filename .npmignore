@@ -53,11 +53,6 @@ test/
 src/
 babelhook.js
 
-coverage/
-docs/
-.publish/
-.editorconfig
-.eslintrc
+.eslintrc*
+.eslintignore
 .gitignore
-.travis.yml
-gulpfile.js
