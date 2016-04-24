@@ -1,33 +1,36 @@
 
 export {
   Connector,
-  connector,
   setConnector
-} from './tangojs/Connector'
+} from './tangojs/core/Connector'
 
-import { AttributeProxy } from './tangojs/proxy/AttributeProxy'
-import { CommandProxy }   from './tangojs/proxy/CommandProxy'
-import { Database }       from './tangojs/proxy/Database'
-import { DeviceProxy }    from './tangojs/proxy/DeviceProxy'
+import { AttributeInfo }   from './tangojs/core/api/AttributeInfo'
+import { AttributeProxy }  from './tangojs/core/api/AttributeProxy'
+import { CommandInfo }     from './tangojs/core/api/CommandInfo'
+import { CommandProxy }    from './tangojs/core/api/CommandProxy'
+import { Database }        from './tangojs/core/api/Database'
+import { DbDatum }         from './tangojs/core/api/DbDatum'
+import { DeviceAttribute } from './tangojs/core/api/DeviceAttribute'
+import { DeviceData }      from './tangojs/core/api/DeviceData'
+import { DeviceInfo }      from './tangojs/core/api/DeviceInfo'
+import { DeviceProxy }     from './tangojs/core/api/DeviceProxy'
+
 
 /** @private */
-export const proxy = {
-  AttributeProxy, CommandProxy, Database, DeviceProxy
+export const api = {
+  AttributeInfo,
+  AttributeProxy,
+  CommandInfo,
+  CommandProxy,
+  Database,
+  DbDatum,
+  DeviceAttribute,
+  DeviceData,
+  DeviceInfo,
+  DeviceProxy
 }
 
-import { AttributeInfo }   from './tangojs/struct/AttributeInfo'
-import { CommandInfo }     from './tangojs/struct/CommandInfo'
-import { DbDatum }         from './tangojs/struct/DbDatum'
-import { DeviceAttribute } from './tangojs/struct/DeviceAttribute'
-import { DeviceData }      from './tangojs/struct/DeviceData'
-import { DeviceInfo }      from './tangojs/struct/DeviceInfo'
+import * as tangoIDL from './tangojs/core/tango/generated'
 
 /** @private */
-export const struct = {
-  AttributeInfo, CommandInfo, DbDatum, DeviceAttribute, DeviceData, DeviceInfo
-}
-
-import * as generatedTango from './tangojs/tango/generated'
-
-/** @private */
-export const tango = generatedTango
+export const tango = tangoIDL

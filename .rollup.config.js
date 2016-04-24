@@ -4,7 +4,7 @@ export default {
   dest: 'lib/tangojs-core.js',
   format: 'umd',
   moduleId: 'tangojs-core',
-  moduleName: 'tangojs',
+  moduleName: 'tangojs.core',
   plugins: [],
   sourceMap: true
 }
