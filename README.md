@@ -10,22 +10,22 @@ TANGO Control System client library for web browsers.
 ## Examples
 
 ```javascript
-import tangojs from 'tangojs'
+import tangojs from 'tangojs-core'
 import { MyConnectorImpl } from 'my-tangojs-connector'
 
 let conn = new MyConnectorImpl(...)
 tangojs.setConnector(conn)
 
-let devProxy = new tangojs.proxy.DeviceProxy('tangojs/test/1')
+let devProxy = new tangojs.api.DeviceProxy('tangojs/test/1')
 
 devProxy.get_attribute_list().then(attributes =>
   console.log(`Attributes: ${attributes}`)
 )
 
-let attProxy = new tangojs.proxy.AttributeProxy(
+let attProxy = new tangojs.api.AttributeProxy(
   'tangojs/test/1/number_scalar')
 
-let in = new tangojs.struct.AttributeValue({
+let in = new tangojs.api.AttributeValue({
   value: 32
 })
 
@@ -35,9 +35,9 @@ attProxt.read().then(outVal =>
   console.log(`Value: ${outVal.value}`)
 )
 
-let cmdProxy = new tangojs.proxy.CommandProxy('tangojs/test/1/double')
+let cmdProxy = new tangojs.api.CommandProxy('tangojs/test/1/double')
 
-let argin = new tangojs.struct.DeviceData(10)
+let argin = new tangojs.api.DeviceData(10)
 
 cmdProxy.inout(argin).then(result =>
   console.log(`Command: 2*10 = ${result.value}`)
@@ -47,20 +47,21 @@ cmdProxy.inout(argin).then(result =>
 ## Installation
 
 Install it via npm:
-```shell
+```bash
 npm install --save tangojs-core
 ```
 
 And include in your project:
 ```javascript
-import tangojs from 'tangojs'
+import tangojs from 'tangojs-core'
 ```
 
-And load it directly in the browser (this attaches the `tangojs` object to
-the `window`):
+If you are in browser, load it like:
 ```html
-<script type="text/javascript">tangojs/lib/tangojs.js</script>
+<script type="text/javascript">tangojs-core/lib/tangojs-core.js</script>
 ```
+
+*note*: this attaches `tangojs.core` object to the `window`.
 
 ## Connectors
 
