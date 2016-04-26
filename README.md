@@ -68,7 +68,8 @@ If you are in browser, load it like:
 TangoJS is designed to support multiple *connectors* (backends).
 A connector is basically a low-level proxy between the TangoJS frontend stack
 and the server-side implementation. You can use one of existing connectors or
-implement your own (refer to the [`Connector`](#) interface in the docs).
+implement your own (refer to the
+[`Connector`](https://tangojs.github.io/apidocs) interface in the docs).
 
 Available connectors:
 
@@ -77,7 +78,7 @@ Available connectors:
 
 ## Documentation
 
-API docs are available [here](#).
+API docs are available [here](https://tangojs.github.io/apidocs).
 
 ## License
 
