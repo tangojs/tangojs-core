@@ -53,6 +53,7 @@ test/
 src/
 babelhook.js
 
+.docs.publish.js
 .esdoc.json
 .eslintignore
 .eslintrc.yaml
