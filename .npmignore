@@ -53,6 +53,8 @@ test/
 src/
 babelhook.js
 
-.eslintrc*
+.esdoc.json
 .eslintignore
+.eslintrc.yaml
 .gitignore
+.rollup.config.js
