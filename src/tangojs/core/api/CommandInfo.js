@@ -6,7 +6,7 @@ export class CommandInfo extends DevCmdInfo_2 {
   /**
    * @param {Object} data
    */
-  constructor(data) {
+  constructor (data) {
     super(data)
   }
 }

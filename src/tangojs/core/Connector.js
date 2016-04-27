@@ -11,7 +11,7 @@ export let connector = null
  * Sets connector interface implementation.
  * @param {Connector} conn connector implementation
  */
-export function setConnector(conn) {
+export function setConnector (conn) {
   connector = conn
 }
 
@@ -24,127 +24,128 @@ export function setConnector(conn) {
 export class Connector {
 
   /**
-   * @return {Promise<string>}
    * @param {string} devname
+   * @return {Promise<string,Error>}
    */
-  get_device_status(devname) { }
+  get_device_status (devname) { }
 
   /**
-   * @return {Promise<DevState>}
    * @param {string} devname
+   * @return {Promise<DevState,Error>}
    */
-  get_device_state(devname) { }
+  get_device_state (devname) { }
 
   /**
-   * @return {Promise<DeviceInfo>}
    * @param {string} devname
+   * @return {Promise<DeviceInfo,Error>}
    */
-  get_device_info(devname) { }
+  get_device_info (devname) { }
 
   /**
-   * @return {Promise<string[]>}
    * @param {string} pattern
+   * @return {Promise<string[],Error>}
    */
-  get_device_list(pattern) { }
+  get_device_list (pattern) { }
 
   /**
-   * @return {Promise<string[]>}
    * @param {string} pattern
+   * @return {Promise<string[],Error>}
    */
-  get_device_domain(pattern) { }
+  get_device_domain (pattern) { }
 
   /**
-   * @return {Promise<string[]>}
    * @param {string} pattern
+   * @return {Promise<string[],Error>}
    */
-  get_device_family(pattern) { }
+  get_device_family (pattern) { }
 
   /**
-   * @return {Promise<string[]>}
    * @param {string} pattern
+   * @return {Promise<string[],Error>}
    */
-  get_device_member(pattern) { }
+  get_device_member (pattern) { }
 
   /**
-   * @return {Promise<string[]>}
    * @param {string} devname
    * @param {string} pattern
+   * @return {Promise<string[],Error>}
    */
-  get_device_property_list(devname, pattern) { }
+  get_device_property_list (devname, pattern) { }
 
   /**
-   * @return {Promise<DbDatum>|Promise<DbDatum[]>}
    * @param {string} devname
-   * @param {string|string[]|DbDatum[]} propnames
+   * @param {string[]} propnames
+   * @return {Promise<DbDatum[],Error>}
    */
-  get_device_property(devname, propnames) { }
+  get_device_property (devname, propnames) { }
 
   /**
-   * @return {Promise<undefined>}
    * @param {string} devname
    * @param {DbDatum[]} properties
+   * @return {Promise<undefined,Error>}
    */
-  put_device_property(devname, properties) { }
+  put_device_property (devname, properties) { }
 
   /**
-   * @return {Promise<undefined>}
    * @param {string} devname
-   * @param {string|string[]|DbDatum[]} propnames property names
+   * @param {string[]} propnames
+   * @return {Promise<undefined,Error>}
    */
-  delete_device_property(devname, propnames) { }
+  delete_device_property (devname, propnames) { }
 
   /**
-   * @return {Promise<string[]>}
    * @param {string} devname
+   * @return {Promise<string[],Error>}
    */
-  get_device_attribute_list(devname) { }
+  get_device_attribute_list (devname) { }
 
   /**
-   * @return {Promise<AttributeInfo>|Promise<AttributeInfo[]>}
    * @param {string} devname
-   * @param {undefined|string|string[]} attnames
+   * @param {string[]} attnames
+   * @return {Promise<AttributeInfo[],Error>}
    */
-  get_device_attribute_info(devname, attnames) { }
+  get_device_attribute_info (devname, attnames) { }
 
   /**
-   * @return {Promise<DeviceAttribute>|Promise<DeviceAttribute[]>}
    * @param {string} devname
-   * @param {string|string[]} attname
+   * @param {string[]} attname
+   * @return {Promise<DeviceAttribute[],Error>}
    */
-  read_device_attribute(devname, attname) { }
+  read_device_attribute (devname, attname) { }
 
   /**
-   * @return {Promise<undefined>}
+
    * @param {string} devname
-   * @param {DeviceAttribute|DeviceAttribute[]} attrs
+   * @param {DeviceAttribute[]} attrs
+   * @return {Promise<undefined,Error>}
    */
-  write_device_attribute(devname, attrs) { }
+  write_device_attribute (devname, attrs) { }
 
   /**
-   * @return {Promise<DeviceAttribute>|Promise<DeviceAttribute[]>}
    * @param {string} devname
-   * @param {DeviceAttribute|DeviceAttribute[]} attrs
+   * @param {DeviceAttribute[]} attrs
+   * @return {Promise<DeviceAttribute[],Error>}
    */
-  write_read_device_attribute(devname, attrs) { }
+  write_read_device_attribute (devname, attrs) { }
 
   /**
-   * @return {Promise<DeviceData>}
    * @param {string} devname
    * @param {string} cmdname
    * @param {undefined|DeviceData} argin
+   * @return {Promise<DeviceData,Error>}
    */
-  device_command_inout(devname, cmdname, argin) { }
+  device_command_inout (devname, cmdname, argin) { }
 
   /**
-   * @return {Promise<CommandInfo>}
    * @param {string} devname
    * @param {string} cmdname
+   * @return {Promise<CommandInfo,Error>}
    */
-  device_command_query(devname, cmdname) { }
+  device_command_query (devname, cmdname) { }
 
   /**
-   * @return {Promise<CommandInfo[]>}
    * @param {string} devname
+   * @return {Promise<CommandInfo[],Error>}
    */
-  device_command_list_query(devname) { }
+  device_command_list_query (devname) { }
 }

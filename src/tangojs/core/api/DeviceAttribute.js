@@ -6,7 +6,7 @@ export class DeviceAttribute extends AttributeValue_5 {
   /**
    * @param {Object} data
    */
-  constructor(data) {
+  constructor (data) {
     super(data)
   }
 }

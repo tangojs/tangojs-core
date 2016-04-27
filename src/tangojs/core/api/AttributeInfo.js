@@ -6,7 +6,7 @@ export class AttributeInfo extends AttributeConfig_5 {
   /**
    * @param {Object} data
    */
-  constructor(data) {
+  constructor (data) {
     super(data)
   }
 }
