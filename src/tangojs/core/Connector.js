@@ -24,6 +24,13 @@ export function setConnector (conn) {
 export class Connector {
 
   /**
+   * Return the default database address
+   *
+   * @return {Promise<string,Error>}
+   */
+  get_database () { }
+
+  /**
    * @param {string} devname
    * @return {Promise<string,Error>}
    */
