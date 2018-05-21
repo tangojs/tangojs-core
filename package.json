@@ -1,6 +1,6 @@
 {
   "name": "tangojs-core",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Javascript API for TANGO Contols.",
   "main": "lib/tangojs-core.js",
   "author": "mliszcz <liszcz.michal@gmail.com>",
