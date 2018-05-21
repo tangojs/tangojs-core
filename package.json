@@ -1,7 +1,7 @@
 {
   "name": "tangojs-core",
-  "version": "0.4.0",
-  "description": "Web frontend API for TANGO Contols.",
+  "version": "0.5.0",
+  "description": "Javascript API for TANGO Contols.",
   "main": "lib/tangojs-core.js",
   "author": "mliszcz <liszcz.michal@gmail.com>",
   "license": "MIT",
@@ -27,11 +27,11 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "esdoc": "^0.4.6",
-    "eslint": "^2.8.0",
-    "gh-pages": "^0.11.0",
-    "git-rev-sync": "^1.5.1",
-    "git-url-parse": "^6.0.2",
-    "rollup": "^0.26.0"
+    "esdoc": "^1.1.0",
+    "eslint": "^4.19.1",
+    "gh-pages": "^1.1.0",
+    "git-rev-sync": "^1.12.0",
+    "git-url-parse": "^9.0.0",
+    "rollup": "^0.59.2"
   }
 }

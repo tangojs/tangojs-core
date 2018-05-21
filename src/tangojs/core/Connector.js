@@ -31,7 +31,7 @@ export class Connector {
   get_database () { }
 
   /**
-   * Asynchronous initialisation  
+   * Asynchronous initialisation
    *
    * @return {Promise<Connector,Error>}
    */

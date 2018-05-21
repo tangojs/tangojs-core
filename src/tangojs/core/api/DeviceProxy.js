@@ -40,7 +40,7 @@ function extractNames (nameArray) {
       return ''
     }
   })
-  .filter(name => name !== '')
+    .filter(name => name !== '')
 }
 
 /** @private */
@@ -113,8 +113,8 @@ export class DeviceProxy {
    */
   get_property (propnames) {
     return handleAsArray(propnames, nameLikeArray => {
-      return connector.get_device_property(this[_devname],
-                                           extractNames(nameLikeArray))
+      const names = extractNames(nameLikeArray)
+      return connector.get_device_property(this[_devname], names)
     })
   }
 
@@ -134,8 +134,8 @@ export class DeviceProxy {
    */
   delete_property (propnames) {
     return handleAsArrayReturningUndefined(propnames, nameLikeArray => {
-      return connector.delete_device_property(this[_devname],
-                                              extractNames(nameLikeArray))
+      const names = extractNames(nameLikeArray)
+      return connector.delete_device_property(this[_devname], names)
     })
   }
 
@@ -185,8 +185,7 @@ export class DeviceProxy {
    */
   write_read_attribute (attrs) {
     return handleAsArray(attrs, devAttrArray => {
-      return connector.write_read_device_attribute(this[_devname],
-                                                   devAttrArray)
+      return connector.write_read_device_attribute(this[_devname], devAttrArray)
     })
   }
 
