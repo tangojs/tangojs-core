@@ -1,10 +1,23 @@
 
 import { connector } from '../Connector'
+import { DeviceProxy } from './DeviceProxy'
 
-export class Database {
+export class Database extends DeviceProxy {
 
-  constructor () {
-    // empty
+  constructor (devname) {
+    super(devname)
+  }
+
+  /**
+   * Create an instance of the default Database proxy
+   *
+   * @param {string} pattern
+   * @return {Promise<Database,Error>}
+   */
+  static default () {
+    return connector.get_database().then(name => {
+      return new Database(name)
+    })
   }
 
   /**
