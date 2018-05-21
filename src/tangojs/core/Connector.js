@@ -31,6 +31,14 @@ export class Connector {
   get_database () { }
 
   /**
+   * Asynchronous initialisation  
+   *
+   * @return {Promise<Connector,Error>}
+   */
+  init () { }
+
+
+  /**
    * @param {string} devname
    * @return {Promise<string,Error>}
    */
