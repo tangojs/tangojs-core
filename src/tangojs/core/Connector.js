@@ -24,6 +24,12 @@ export function setConnector (conn) {
 export class Connector {
 
   /**
+   * Asynchronous initialisation  
+   * @return {Promise<Connector,Error>}
+   */
+  init () { }
+
+  /**
    * @param {string} devname
    * @return {Promise<string,Error>}
    */
