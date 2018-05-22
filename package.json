@@ -1,5 +1,5 @@
 {
-  "name": "tangojs-core",
+  "name": "@tangojs/tangojs-core",
   "version": "0.6.0",
   "description": "Javascript API for TANGO Contols.",
   "main": "lib/tangojs-core.js",
